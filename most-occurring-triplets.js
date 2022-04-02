@@ -58,11 +58,9 @@ function popularUserJourneyTriplets(log, opts) {
 
         journeyTripletsMapped.splice(opts.limit)
     
-        if (opts.printLog) {
-            journeyTripletsMapped.forEach((j) => {
-                console.log(j.paths, "// cnt", j.count)
-            })
-        }
+        journeyTripletsMapped.forEach((j) => {
+            console.log(j.paths, "// cnt", j.count)
+        })
 
         return journeyTripletsMapped.map((j) => (j.paths))
     }
@@ -77,16 +75,8 @@ function popularUserJourneyTriplets(log, opts) {
 const args = process.argv
 const fileName = args[2]
 const limit = args[3]
-const shouldPrint = args[4]
-
-printLog = false
-if (shouldPrint === 'true') {
-    printLog = true
-} else if (shouldPrint === 'false') {
-    printLog = false
-} 
 
 let rawdata = fs.readFileSync(path.resolve(__dirname, fileName));
 let logFile = JSON.parse(rawdata);
 
-popularUserJourneyTriplets(logFile, { limit: limit, printLog: printLog })
+popularUserJourneyTriplets(logFile, { limit: limit })
