@@ -76,7 +76,11 @@ const args = process.argv
 const fileName = args[2]
 const limit = args[3]
 
-let rawdata = fs.readFileSync(path.resolve(__dirname, fileName));
-let logFile = JSON.parse(rawdata);
+try {
+    let rawdata = fs.readFileSync(path.resolve(__dirname, fileName));
+    let logFile = JSON.parse(rawdata);
+    popularUserJourneyTriplets(logFile, { limit: limit })
+} catch (e) {
+    console.log(`Problem with parsing ${fileName}. ${e}`);
+}
 
-popularUserJourneyTriplets(logFile, { limit: limit })
